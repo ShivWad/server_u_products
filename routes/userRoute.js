@@ -21,8 +21,8 @@ route.post("/user", async (req, res) => {
  * Fetch single user
  */
 route.get("/user/:id", async (req, res) => {
+  let { id } = req.params;
   try {
-    let { id } = req.params;
     console.log(`Calling /get/user/:${id}`);
     let user = await User.findById(id);
     res.status(200).json(user);
@@ -50,8 +50,8 @@ route.get("/users", async (req, res) => {
  * Update User
  */
 route.put("/user/:id", async (req, res) => {
+  let { id } = req.params;
   try {
-    let { id } = req.params;
     console.log(`Calling /put/user/:${id}`);
     let user = await User.findByIdAndUpdate(id, req.body);
     if (!user)
@@ -71,8 +71,8 @@ route.put("/user/:id", async (req, res) => {
  * Delete User
  */
 route.delete("/user/:id", async (req, res) => {
+  let { id } = req.params;
   try {
-    let { id } = req.params;
     console.log(`Calling /delete/user/:${id}`);
 
     let user = await User.findByIdAndDelete(id);
