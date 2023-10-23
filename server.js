@@ -11,3 +11,7 @@ db.connectDb(process.env.DB_CS);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
+app.get("/api/health", (req, res) => {
+  return res.status(200).json({ message: "API is UP" });
+});
