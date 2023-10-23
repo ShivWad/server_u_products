@@ -25,6 +25,10 @@ route.get("/user/:id", async (req, res) => {
   try {
     console.log(`Calling /get/user/:${id}`);
     let user = await User.findById(id);
+    if (!user)
+      return res
+        .status(404)
+        .json({ message: `User not found using Id: ${id}` });
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
