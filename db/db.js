@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
  */
 const connectDb = async (uri) => {
   await mongoose
-    .connect(uri)
+    .connect(uri, {dbName:"u_product"})
     .then((res) => {
       console.log("Connected to DB", res.connection.name);
     })

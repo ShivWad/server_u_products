@@ -7,6 +7,8 @@ const route = Router();
  */
 route.post("/signup", async (req, res) => {
   try {
+    if (req.session.authenticated) return res.json(req.session);
+
     console.log("Calling /user/signup");
     let { name, email, password } = req.body;
     name = name.trim();
@@ -47,9 +49,10 @@ route.post("/signup", async (req, res) => {
       email: email,
       password: hashedPwd,
     };
+
     const user = await User.create(userObj);
     console.log("Inserted user: ", user._id);
-    res.status(200).json(user._id);
+    res.status(302).json({ redUrl: "/login" });
   } catch (error) {
     console.error("Failed to call /user/signup");
     console.log("ERROR:>>", error);
@@ -63,6 +66,9 @@ route.post("/signup", async (req, res) => {
 route.post("/login", async (req, res) => {
   console.log("Calling /user/login");
   try {
+    console.log(req.session);
+    if (req.session.authenticated) return res.json(req.session);
+
     let { email, password } = req.body;
     email = email.trim();
 
@@ -90,12 +96,14 @@ route.post("/login", async (req, res) => {
 
             return res.status(401).json(resObj);
           } else {
-            let resObj = {
-              status: "SUCCESS",
-              message: "Login success",
-              receivedPayload: { name: data[0].name, emaiL: data[0].email },
+            req.session.authenticated = true;
+            req.session.user = {
+              name: data[0].name,
+              emaiL: email,
+              userId: data[0].id,
             };
-            return res.status(200).json(resObj);
+
+            return res.status(200).json(req.session);
           }
         }
       })
@@ -108,6 +116,21 @@ route.post("/login", async (req, res) => {
     console.error("Failed to call /user/login");
     console.log("ERROR:>>", error);
     res.status(500).json({ error: error.message, dbCode: error?.code });
+  }
+});
+
+/**
+ * destroy session
+ */
+route.get("/logout", async (req, res) => {
+  try {
+    console.log("calling /user/logout");
+    req.session.destroy();
+    res.send({ message: "destroyed" });
+  } catch (error) {
+    console.error("Failed to call /user/logout");
+    console.log("ERROR:>>", error);
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -186,4 +209,4 @@ route.delete("/id/:id", async (req, res) => {
   }
 });
 
-module.exports = route; 
+module.exports = route;

@@ -1,11 +1,41 @@
-const db = require("./db/db");
 const express = require("express");
+const express_session = require("express-session");
+const cors = require("cors");
+
 const routes = require("./routes");
-require("dotenv").config();
+const db = require("./db/db");
+const { sessionChecker } = require("./utils");
+const dotenv = require("dotenv");
 const app = express();
-app.use(express.json());
-app.use("/api/user/", routes);
 const port = 4000;
+
+dotenv.config();
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
+app.use(express.json());
+
+app.use(
+  express_session({
+    name: "EXSESID",
+    secret: "XDb0XrqDL99Ovkj",
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 3600000,
+      secure: false,
+    },
+  })
+);
+
+app.use(sessionChecker);
+
+app.use("/api", routes);
+
 db.connectDb(process.env.DB_CS);
 
 app.listen(port, () => {
