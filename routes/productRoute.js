@@ -1,12 +1,17 @@
 const { Router } = require("express");
+const express = require("express");
 const Product = require("../db/models/Products");
 const route = Router();
+const multer = require("multer");
+const uploadFileToFireStore = require("../db/firesbase/firebase");
+route.use(express.urlencoded({ extended: false }));
 
+const upload = multer({ storage: multer.memoryStorage() });
 /**
  * Create product
  */
 route.post("/create", async (req, res) => {
-  let { name, ownerId, category, city } = req.body;
+  let { name, ownerId, category, city, images } = req.body;
   try {
     let productObj = {
       name: name,
@@ -15,6 +20,7 @@ route.post("/create", async (req, res) => {
     };
 
     if (category) productObj["category"] = category; //by default, category is others
+    if (images) productObj["images"] = images; //by default, category is others
 
     const product = await Product.create(productObj);
 
@@ -23,6 +29,48 @@ route.post("/create", async (req, res) => {
     return res.status(200).json(product);
   } catch (error) {
     console.error("Failed to call /product/create");
+    console.log("ERROR:>>", error);
+    res.status(500).json({ error: error.message, dbCode: error?.code });
+  }
+});
+
+/**
+ * Upload prouct images
+ */
+route.put("/images/:id", upload.any(), async (req, res) => {
+  let { id } = req.params;
+  let uploadedImages = req.files;
+  try {
+    if (uploadedImages.length < 1) throw Error("No images received");
+    Product.findById(id).then(async (product) => {
+      let imagesString = product?.["images"];
+      let splitImageString;
+
+      splitImageString = imagesString?.split(",");
+      splitImageString = splitImageString ? splitImageString : [];
+      console.log("1>>>", splitImageString);
+
+      for (let i = 0; i < uploadedImages.length; i++) {
+        let downloadUrl = await uploadFileToFireStore(uploadedImages[i]);
+        if (downloadUrl) splitImageString.push(downloadUrl);
+        console.log("4>>", downloadUrl);
+      }
+
+      let updatedImageString = splitImageString.join(",");
+
+      console.log("2>>>", splitImageString);
+
+      console.log("3>>>", updatedImageString);
+
+      let updatedProduct = await Product.findByIdAndUpdate(id, {
+        images: updatedImageString,
+      });
+      res
+        .status(200)
+        .json({ message: "SUCCESS", updatedProduct: updatedProduct });
+    });
+  } catch (error) {
+    console.error("Failed to call /product/images/:id");
     console.log("ERROR:>>", error);
     res.status(500).json({ error: error.message, dbCode: error?.code });
   }

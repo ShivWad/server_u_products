@@ -1,7 +1,6 @@
 const express = require("express");
 const express_session = require("express-session");
 const cors = require("cors");
-
 const routes = require("./routes");
 const db = require("./db/db");
 const { sessionChecker } = require("./utils");

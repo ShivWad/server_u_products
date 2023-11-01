@@ -12,12 +12,20 @@ const ProductSchema = mongoose.Schema(
     },
     category: {
       type: String,
-      required: [false, "Need category"],
+      required: [false],
       default: "Others",
     },
     city: {
       type: String,
       required: [true, "Need city in which this product is right now"],
+    },
+    images: {
+      type: String,
+      required: [false],
+    },
+    description: {
+      type: String,
+      required: [false],
     },
   },
   { timestamps: true }
