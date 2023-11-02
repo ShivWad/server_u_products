@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
-
-const ProductSchema = mongoose.Schema(
+const Schema = mongoose.Schema;
+const ProductSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: [true, "Please enter your name"],
     },
     ownerId: {
-      type: String,
-      required: [true, "Need owner(user) id of this product"],
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "Mising ownderId"],
     },
     category: {
       type: String,
@@ -26,6 +27,15 @@ const ProductSchema = mongoose.Schema(
     description: {
       type: String,
       required: [false],
+    },
+    price: {
+      type: Number,
+      required: [true, "Price Missing"],
+    },
+    isAvailable: {
+      type: Boolean,
+      required: [true, "availablity missing"],
+      default: false,
     },
   },
   { timestamps: true }

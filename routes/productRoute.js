@@ -11,12 +11,14 @@ const upload = multer({ storage: multer.memoryStorage() });
  * Create product
  */
 route.post("/create", async (req, res) => {
-  let { name, ownerId, category, city, images } = req.body;
+  let { name, ownerId, category, city, images, price } = req.body;
+
   try {
     let productObj = {
       name: name,
       ownerId: ownerId,
       city: city,
+      price: price,
     };
 
     if (category) productObj["category"] = category; //by default, category is others
@@ -26,7 +28,7 @@ route.post("/create", async (req, res) => {
 
     console.log("Created product: ", product._id);
 
-    return res.status(200).json(product);
+    return res.status(200).json(product.ownerId);
   } catch (error) {
     console.error("Failed to call /product/create");
     console.log("ERROR:>>", error);
@@ -48,19 +50,13 @@ route.put("/images/:id", upload.any(), async (req, res) => {
 
       splitImageString = imagesString?.split(",");
       splitImageString = splitImageString ? splitImageString : [];
-      console.log("1>>>", splitImageString);
 
       for (let i = 0; i < uploadedImages.length; i++) {
         let downloadUrl = await uploadFileToFireStore(uploadedImages[i]);
         if (downloadUrl) splitImageString.push(downloadUrl);
-        console.log("4>>", downloadUrl);
       }
 
       let updatedImageString = splitImageString.join(",");
-
-      console.log("2>>>", splitImageString);
-
-      console.log("3>>>", updatedImageString);
 
       let updatedProduct = await Product.findByIdAndUpdate(id, {
         images: updatedImageString,
@@ -77,9 +73,8 @@ route.put("/images/:id", upload.any(), async (req, res) => {
 });
 
 /**
- * Get user's products
+ * Get single product
  */
-
 route.get("/id/:id", async (req, res) => {
   let { id } = req.params;
   try {
@@ -108,6 +103,27 @@ route.get("/all", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
     console.error("Failed to call /get/product/all ");
+  }
+});
+
+/**
+ * Update user product
+ */
+route.put("/id/:id", async (req, res) => {
+  let { id } = req.params;
+  try {
+    console.log(`Calling /put/product/:${id}`);
+    let product = await Product.findById(id);
+    console.log(">>", product);
+    if (!product)
+      return res
+        .status(404)
+        .json({ message: `product not found using Id: ${id}` });
+
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    console.error(`Failed to call /get/product/:${id}`);
   }
 });
 
