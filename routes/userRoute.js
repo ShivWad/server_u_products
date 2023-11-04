@@ -1,15 +1,16 @@
 const { Router } = require("express");
 const User = require("../db/models/User");
-const { cryptPassword, comparePassword } = require("../utils");
+const { cryptPassword, comparePassword, sessionChecker } = require("../utils");
 const route = Router();
 /**
  * Create new user
  */
 route.post("/signup", async (req, res) => {
   try {
-    if (req.session.authenticated) return res.json(req.session);
-
     console.log("Calling /user/signup");
+    if (req.session.authenticated)
+      return res.status(302).json({ redUrl: "/home" });
+
     let { name, email, password } = req.body;
     name = name.trim();
     email = email.trim();
@@ -66,9 +67,8 @@ route.post("/signup", async (req, res) => {
 route.post("/login", async (req, res) => {
   console.log("Calling /user/login");
   try {
-    console.log(req.session);
     if (req.session.authenticated) return res.json(req.session);
-
+    console.log(req.session);
     let { email, password } = req.body;
     email = email.trim();
 
@@ -157,7 +157,7 @@ route.get("/id/:id", async (req, res) => {
 /**
  * Fetch all users
  */
-route.get("/all", async (req, res) => {
+route.get("/all", sessionChecker, async (req, res) => {
   try {
     console.log("Calling /get/user/all");
     let users = await User.find({});
@@ -171,7 +171,7 @@ route.get("/all", async (req, res) => {
 /**
  * Update User
  */
-route.put("/id/:id", async (req, res) => {
+route.put("/id/:id", sessionChecker, async (req, res) => {
   let { id } = req.params;
   try {
     console.log(`Calling /put/user/:${id}`);
@@ -192,7 +192,7 @@ route.put("/id/:id", async (req, res) => {
 /**
  * Delete User
  */
-route.delete("/id/:id", async (req, res) => {
+route.delete("/id/:id", sessionChecker, async (req, res) => {
   let { id } = req.params;
   try {
     console.log(`Calling /delete/user/:${id}`);

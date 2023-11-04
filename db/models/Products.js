@@ -21,7 +21,7 @@ const ProductSchema = new mongoose.Schema(
       required: [true, "Need city in which this product is right now"],
     },
     images: {
-      type: String,
+      type: [String],
       required: [false],
     },
     description: {

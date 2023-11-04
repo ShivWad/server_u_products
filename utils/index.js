@@ -30,25 +30,12 @@ const comparePassword = async (password, hashedPwd) => {
  * @param {import("express").NextFunction} next
  */
 const sessionChecker = (req, res, next) => {
-  console.log("SESSION:", req.session);
-  console.log(req.path);
-
-  if (req.path == "/api/health") return next();
-
   console.log(`Session Checker: ${req.session.authenticated}`.green);
   if (req.session.authenticated) {
     console.log(`Found User Session`.green);
     next();
   } else {
     console.log(`No User Session Found`.red);
-
-    if (
-      req.path == "/api/user/login" ||
-      req.path == "/api/user/signup" ||
-      req.path == "/api/product/all"
-    )
-      return next();
-
     res.status(302).json({ redUrl: "http://127.0.0.1:5500/login.html" });
   }
 };

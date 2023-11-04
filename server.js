@@ -31,7 +31,7 @@ app.use(
   })
 );
 
-app.use(sessionChecker);
+// app.use(sessionChecker);
 
 app.use("/api", routes);
 
