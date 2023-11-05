@@ -97,13 +97,14 @@ route.post("/login", async (req, res) => {
             return res.status(401).json(resObj);
           } else {
             req.session.authenticated = true;
-            req.session.user = {
-              name: data[0].name,
-              emaiL: email,
-              userId: data[0].id,
-            };
-
-            return res.status(200).json(req.session);
+            return res.status(200).json({
+              message: "SUCCESS",
+              user: {
+                name: data[0].name,
+                emaiL: email,
+                userId: data[0].id,
+              },
+            });
           }
         }
       })
