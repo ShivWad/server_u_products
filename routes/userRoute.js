@@ -67,11 +67,8 @@ route.post("/signup", async (req, res) => {
 route.post("/login", async (req, res) => {
   console.log("Calling /user/login");
   try {
-    if (req.session.authenticated) return res.json(req.session);
-    console.log(req.session);
     let { email, password } = req.body;
     email = email.trim();
-
     if (email === "" || password === "") {
       let resObj = {
         status: "FAILED",
@@ -81,31 +78,37 @@ route.post("/login", async (req, res) => {
       console.log(resObj);
       return res.status(400).json(resObj);
     }
-
     User.find({ email })
       .then(async (data) => {
-        if (data) {
-          let hashedPwd = data[0].password;
-          let bool = await comparePassword(password, hashedPwd);
-          if (!bool) {
-            let resObj = {
-              status: "FAILED",
-              message: "Invalid credentials",
-              receivedPayload: { email },
-            };
+        if (!data.length) {
+          //throw 401 when user not found
+          let resObj = {
+            status: "FAILED",
+            message: "Invalid credentials",
+          };
+          return res.status(401).json(resObj);
+        }
+        let hashedPwd = data[0].password;
+        let bool = await comparePassword(password, hashedPwd);
+        if (!bool) {
+          //throw 401 when passwords don't match
 
-            return res.status(401).json(resObj);
-          } else {
-            req.session.authenticated = true;
-            return res.status(200).json({
-              message: "SUCCESS",
-              user: {
-                name: data[0].name,
-                emaiL: email,
-                userId: data[0].id,
-              },
-            });
-          }
+          let resObj = {
+            status: "FAILED",
+            message: "Invalid credentials",
+          };
+
+          return res.status(401).json(resObj);
+        } else {
+          req.session.authenticated = true;
+          return res.status(200).json({
+            message: "SUCCESS",
+            user: {
+              name: data[0].name,
+              emaiL: email,
+              userId: data[0].id,
+            },
+          });
         }
       })
       .catch((error) => {
@@ -117,6 +120,18 @@ route.post("/login", async (req, res) => {
     console.error("Failed to call /user/login");
     console.log("ERROR:>>", error);
     res.status(500).json({ error: error.message, dbCode: error?.code });
+  }
+});
+
+route.get("/checkauth", sessionChecker, (req, res) => {
+  try {
+    return res
+      .status(200)
+      .json({ message: "User session active", isSessionActive: true });
+  } catch (error) {
+    console.error("Failed to call /user/login");
+    console.log("ERROR:>>", error);
+    res.status(500).json({ error: error.message });
   }
 });
 
