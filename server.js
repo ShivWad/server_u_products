@@ -5,7 +5,7 @@ const MongoStore = require("connect-mongo");
 const routes = require("./routes");
 const db = require("./db/db");
 const dotenv = require("dotenv");
-const { CATEGORIES_JSON } = require("./utils");
+const { CATEGORIES_JSON, GetCityState } = require("./utils");
 const app = express();
 const port = 4000;
 
@@ -57,4 +57,9 @@ app.get("/api/health", (req, res) => {
 app.get("/api/categories", (req, res) => {
   let catJson = CATEGORIES_JSON;
   return res.json(catJson);
+});
+
+app.get("/api/cities", (req, res) => {
+  let citiesJson = GetCityState();
+  return res.json(citiesJson);
 });

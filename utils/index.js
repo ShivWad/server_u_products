@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
-
+const cityState = require("./city_state.json");
 /**
  *
  * @param {*} password
@@ -166,9 +166,23 @@ const CATEGORIES_JSON = {
   ],
 };
 
+/**
+ *
+ * @returns captial : [cities][]
+ */
+const GetCityState = () => {
+  let city_state = {};
+  cityState.forEach((obj) => {
+    if (city_state[obj.capital] === undefined) city_state[obj.capital] = [];
+    city_state[obj.capital].push(obj.city);
+  });
+  return city_state;
+};
+
 module.exports = {
   cryptPassword,
   comparePassword,
   sessionChecker,
   CATEGORIES_JSON,
+  GetCityState,
 };

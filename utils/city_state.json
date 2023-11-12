@@ -1,0 +1,602 @@
+[
+  {
+    "city": "Delhi",
+    "capital": "Delhi"
+  },
+  {
+    "city": "Mumbai",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Kolkāta",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Bangalore",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Chennai",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Hyderābād",
+    "capital": "Telangāna"
+  },
+  {
+    "city": "Pune",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Ahmedabad",
+    "capital": "Gujarāt"
+  },
+  {
+    "city": "Sūrat",
+    "capital": "Gujarāt"
+  },
+  {
+    "city": "Prayagraj",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Lucknow",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Jaipur",
+    "capital": "Rājasthān"
+  },
+  {
+    "city": "Cawnpore",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Mirzāpur",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Nāgpur",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Ghāziābād",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Vadodara",
+    "capital": "Gujarāt"
+  },
+  {
+    "city": "Vishākhapatnam",
+    "capital": "Andhra Pradesh"
+  },
+  {
+    "city": "Indore",
+    "capital": "Madhya Pradesh"
+  },
+  {
+    "city": "Thāne",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Bhopāl",
+    "capital": "Madhya Pradesh"
+  },
+  {
+    "city": "Chinchvad",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Patna",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Bilāspur",
+    "capital": "Chhattīsgarh"
+  },
+  {
+    "city": "Ludhiāna",
+    "capital": "Punjab"
+  },
+  {
+    "city": "Agwār",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Āgra",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Madurai",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Jamshedpur",
+    "capital": "Jhārkhand"
+  },
+  {
+    "city": "Nāsik",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Farīdābād",
+    "capital": "Haryāna"
+  },
+  {
+    "city": "Aurangābād",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Rājkot",
+    "capital": "Gujarāt"
+  },
+  {
+    "city": "Meerut",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Jabalpur",
+    "capital": "Madhya Pradesh"
+  },
+  {
+    "city": "Kalamboli",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Vasai",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Najafgarh",
+    "capital": "Delhi"
+  },
+  {
+    "city": "Vārānasi",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Srīnagar",
+    "capital": "Jammu and Kashmīr"
+  },
+  {
+    "city": "Dhanbād",
+    "capital": "Jhārkhand"
+  },
+  {
+    "city": "Amritsar",
+    "capital": "Punjab"
+  },
+  {
+    "city": "Alīgarh",
+    "capital": "Uttar Pradesh"
+  },
+  {
+    "city": "Guwāhāti",
+    "capital": "Assam"
+  },
+  {
+    "city": "Hāora",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Rānchi",
+    "capital": "Jhārkhand"
+  },
+  {
+    "city": "Gwalior",
+    "capital": "Madhya Pradesh"
+  },
+  {
+    "city": "Chandīgarh",
+    "capital": "Chandīgarh"
+  },
+  {
+    "city": "Vijayavāda",
+    "capital": "Andhra Pradesh"
+  },
+  {
+    "city": "Jodhpur",
+    "capital": "Rājasthān"
+  },
+  {
+    "city": "Raipur",
+    "capital": "Chhattīsgarh"
+  },
+  {
+    "city": "Kota",
+    "capital": "Rājasthān"
+  },
+  {
+    "city": "Kālkāji Devi",
+    "capital": "Delhi"
+  },
+  {
+    "city": "Bhayandar",
+    "capital": "Mahārāshtra"
+  },
+  {
+    "city": "Ambattūr",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Salt Lake City",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Bhātpāra",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Kūkatpalli",
+    "capital": "Andhra Pradesh"
+  },
+  {
+    "city": "Darbhanga",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Dāsarhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Muzaffarpur",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Oulgaret",
+    "capital": "Puducherry"
+  },
+  {
+    "city": "New Delhi",
+    "capital": "Delhi"
+  },
+  {
+    "city": "Tiruvottiyūr",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Puducherry",
+    "capital": "Puducherry"
+  },
+  {
+    "city": "Byatarayanpur",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Pallāvaram",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Secunderābād",
+    "capital": "Andhra Pradesh"
+  },
+  {
+    "city": "Shimla",
+    "capital": "Himāchal Pradesh"
+  },
+  {
+    "city": "Puri",
+    "capital": "Odisha"
+  },
+  {
+    "city": "Shrīrāmpur",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Hugli",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Chandannagar",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Sultānpur Mazra",
+    "capital": "Delhi"
+  },
+  {
+    "city": "Krishnanagar",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Bārākpur",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Bhālswa Jahangirpur",
+    "capital": "Delhi"
+  },
+  {
+    "city": "Nāngloi Jāt",
+    "capital": "Delhi"
+  },
+  {
+    "city": "Yelahanka",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Titāgarh",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Dam Dam",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Bānsbāria",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Madhavaram",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Baj Baj",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Nerkunram",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Kendrāparha",
+    "capital": "Odisha"
+  },
+  {
+    "city": "Sijua",
+    "capital": "Jhārkhand"
+  },
+  {
+    "city": "Manali",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Chakapara",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Pāppākurichchi",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Herohalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Madipakkam",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Sabalpur",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Salua",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Balasore",
+    "capital": "Odisha"
+  },
+  {
+    "city": "Jālhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Chinnasekkadu",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Jethuli",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Nagtala",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Bāgalūr",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Pakri",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Hunasamaranhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Hesarghatta",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Bommayapālaiyam",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Gundūr",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Punādih",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Harilādih",
+    "capital": "Jhārkhand"
+  },
+  {
+    "city": "Alāwalpur",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Mādnāikanhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Kādiganahalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Mahuli",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Zeyādah Kot",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Arshakunti",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Hīrāpur",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Mirchi",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Sonudih",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Sondekoppa",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Babura",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Mādavar",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Kadabgeri",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Nanmangalam",
+    "capital": "Tamil Nādu"
+  },
+  {
+    "city": "Taliganja",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Tarchha",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Belgharia",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Kammanhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Sonnappanhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Kedihāti",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Doddajīvanhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Simli Murārpur",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Sonāwān",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Devanandapur",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Tribeni",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Huttanhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Nathupur",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Bāli",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Vājarhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Saino",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Shekhpura",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Cāchohalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Nārāyanpur Kola",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Gyan Chak",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Kasgatpur",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Kitanelli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Harchandi",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Santoshpur",
+    "capital": "West Bengal"
+  },
+  {
+    "city": "Bendravādi",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Kodagihalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Harna Buzurg",
+    "capital": "Bihār"
+  },
+  {
+    "city": "Mailanhalli",
+    "capital": "Karnātaka"
+  },
+  {
+    "city": "Sultānpur",
+    "capital": "Bihār"
+  }
+]

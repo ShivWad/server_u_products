@@ -13,6 +13,11 @@ const ProductSchema = new mongoose.Schema(
     },
     category: {
       type: String,
+      required: [true],
+      default: "Missing category",
+    },
+    subCategory: {
+      type: String,
       required: [false],
       default: "Others",
     },

@@ -12,7 +12,16 @@ const upload = multer({ storage: multer.memoryStorage() });
  * Create product
  */
 route.post("/create", sessionChecker, async (req, res) => {
-  let { name, ownerId, category, city, images, price, description } = req.body;
+  let {
+    name,
+    ownerId,
+    category,
+    city,
+    images,
+    price,
+    description,
+    subCategory,
+  } = req.body;
 
   try {
     let productObj = {
@@ -21,10 +30,11 @@ route.post("/create", sessionChecker, async (req, res) => {
       city: city,
       price: price,
       description: description,
+      category: category,
       isAvailable: true,
     };
 
-    if (category) productObj["category"] = category; //by default, category is others
+    if (subCategory) productObj["subCategory"] = subCategory; //by default, category is others
     if (images) productObj["images"] = images; //by default, category is others
 
     const product = await Product.create(productObj);
