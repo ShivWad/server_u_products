@@ -4,12 +4,16 @@ const ProductSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please enter your name"],
+      required: [true, "Please enter product name"],
     },
     ownerId: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: [true, "Mising ownderId"],
+    },
+    ownerName: {
+      type: String,
+      required: [true, "Please enter product ownerName"],
     },
     category: {
       type: String,

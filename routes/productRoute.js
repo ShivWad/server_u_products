@@ -21,6 +21,7 @@ route.post("/create", sessionChecker, async (req, res) => {
     price,
     description,
     subCategory,
+    ownerName,
   } = req.body;
 
   try {
@@ -32,6 +33,7 @@ route.post("/create", sessionChecker, async (req, res) => {
       description: description,
       category: category,
       isAvailable: true,
+      ownerName: ownerName,
     };
 
     if (subCategory) productObj["subCategory"] = subCategory; //by default, category is others
@@ -63,6 +65,9 @@ route.put("/images/:id", [sessionChecker, upload.any()], async (req, res) => {
 
     Product.findById(id).then(async (product) => {
       let imagesStringArray = product.images;
+
+      console.log("imagesStringArray.length", imagesStringArray.length);
+
       if (
         imagesStringArray.length >= 5 ||
         imagesStringArray.length + uploadedImages.length > 5
@@ -88,6 +93,45 @@ route.put("/images/:id", [sessionChecker, upload.any()], async (req, res) => {
     console.error("Failed to call /product/images/:id");
     console.log("ERROR:>>", error);
     res.status(500).json({ error: error.message, dbCode: error?.code });
+  }
+});
+
+route.put("/remove1", upload.any(), async (req, res) => {
+  try {
+    let uploadedImages = req.files;
+
+    console.log("Calling /get/product/all");
+    let products = await Product.find({
+      isAvailable: { $eq: true },
+    }).sort({ createdAt: "desc" });
+
+    for (let i = 0; i < products.length; i++) {
+      let imagesStringArray = products[i].images;
+      let newArr = imagesStringArray.splice(1);
+
+      let downloadUrl = await uploadFileToFireStore(uploadedImages[0]);
+      if (downloadUrl) imagesStringArray.push(downloadUrl);
+
+      newArr.push(downloadUrl);
+
+      downloadUrl = await uploadFileToFireStore(uploadedImages[1]);
+      if (downloadUrl) imagesStringArray.push(downloadUrl);
+
+      newArr.push(downloadUrl);
+
+      console.log(newArr.length);
+
+      let updatedProd = await Product.findByIdAndUpdate(products[i]._id, {
+        images: newArr,
+      });
+
+      console.log(updatedProd);
+    }
+
+    return res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message, dbCode: error?.code });
+    console.error("Failed to call /get/product/all ");
   }
 });
 
@@ -117,7 +161,9 @@ route.get("/id/:id", async (req, res) => {
 route.get("/all", async (req, res) => {
   try {
     console.log("Calling /get/product/all");
-    let products = await Product.find({});
+    let products = await Product.find({
+      isAvailable: { $eq: true },
+    }).sort({ createdAt: "desc" });
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ error: error.message, dbCode: error?.code });
