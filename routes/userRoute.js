@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const User = require("../db/models/User");
 const { cryptPassword, comparePassword, sessionChecker } = require("../utils");
+const MongoStore = require("connect-mongo");
 const route = Router();
 /**
  * Create new user
@@ -138,7 +139,7 @@ route.get("/checkauth", sessionChecker, (req, res) => {
 /**
  * destroy session
  */
-route.get("/logout", async (req, res) => {
+route.get("/logout", sessionChecker, async (req, res) => {
   try {
     console.log("calling /user/logout");
     req.session.destroy();
