@@ -13,17 +13,25 @@ route.post("/signup", async (req, res) => {
       return res.status(302).json({ redUrl: "/home" });
 
     let { name, email, password } = req.body;
-    name = name.trim();
     email = email.trim();
 
-    let nameRegEx = /^[a-zA-z]*$/;
+    if (name.trim().length < 1) {
+      let resObj = {
+        status: "FAILED",
+        message: "Missing information",
+      };
+      console.log(resObj);
+      return res.status(400).json(resObj);
+    }
+
+    let nameRegEx = /^[a-zA-z ]*$/;
+
     let emailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (name === "" || email === "" || password === "") {
       let resObj = {
         status: "FAILED",
         message: "Missing information",
-        receivedPayload: { name, email, password },
       };
       console.log(resObj);
       return res.status(400).json(resObj);
@@ -31,7 +39,6 @@ route.post("/signup", async (req, res) => {
       let resObj = {
         status: "FAILED",
         message: "Invalid name received",
-        receivedPayload: { name, email, password },
       };
       console.log(resObj);
       return res.status(400).json(resObj);
@@ -39,7 +46,6 @@ route.post("/signup", async (req, res) => {
       let resObj = {
         status: "FAILED",
         message: "Invalid email received",
-        receivedPayload: { name, email, password },
       };
       console.log(resObj);
       return res.status(400).json(resObj);
@@ -54,11 +60,20 @@ route.post("/signup", async (req, res) => {
 
     const user = await User.create(userObj);
     console.log("Inserted user: ", user._id);
-    res.status(302).json({ redUrl: "/login" });
+    res
+      .status(200)
+      .json({ message: "Signed Up succefully!", status: "SUCCESS" });
   } catch (error) {
     console.error("Failed to call /user/signup");
     console.log("ERROR:>>", error);
-    res.status(500).json({ error: error.message, dbCode: error?.code });
+    let message = error?.message;
+    if (error?.code === 11000) {
+      message = "Email already in use!";
+    }
+
+    res
+      .status(500)
+      .json({ message: message, status: "FAILED", dbCode: error?.code });
   }
 });
 
@@ -103,12 +118,13 @@ route.post("/login", async (req, res) => {
         } else {
           req.session.authenticated = true;
           return res.status(200).json({
-            message: "SUCCESS",
+            status: "SUCCESS",
             user: {
               name: data[0].name,
               emaiL: email,
               userId: data[0].id,
             },
+            message: "Logged in succesfully",
           });
         }
       })
@@ -120,7 +136,12 @@ route.post("/login", async (req, res) => {
   } catch (error) {
     console.error("Failed to call /user/login");
     console.log("ERROR:>>", error);
-    res.status(500).json({ error: error.message, dbCode: error?.code });
+    let resObj = {
+      message: error.message,
+      dbCode: error?.code,
+      status: "FAILED",
+    };
+    res.status(500).json(resObj);
   }
 });
 
