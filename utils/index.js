@@ -30,13 +30,21 @@ const comparePassword = async (password, hashedPwd) => {
  * @param {import("express").NextFunction} next
  */
 const sessionChecker = (req, res, next) => {
+  let userObj = {
+    isAuthenticated: false,
+  };
+
   console.log(`Session Checker: ${req.session.authenticated}`);
   if (req.session.authenticated) {
     console.log(`Found User Session`);
     next();
   } else {
     console.log(`No User Session Found`);
-    res.status(302).json({ redUrl: "http://localhost:3000/login" });
+    res.status(401).json({
+      message: "User not found",
+      isSessionActive: false,
+      userObj: userObj,
+    });
   }
 };
 

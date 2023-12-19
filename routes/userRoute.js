@@ -117,6 +117,9 @@ route.post("/login", async (req, res) => {
           return res.status(401).json(resObj);
         } else {
           req.session.authenticated = true;
+          req.session.name = data[0].name;
+          req.session.emaiL = email;
+          req.session.userId = data[0].id;
           return res.status(200).json({
             status: "SUCCESS",
             user: {
@@ -147,9 +150,18 @@ route.post("/login", async (req, res) => {
 
 route.get("/checkauth", sessionChecker, (req, res) => {
   try {
-    return res
-      .status(200)
-      .json({ message: "User session active", isSessionActive: true });
+    let userObj = {
+      name: req.session.name,
+      emaiL: req.session.emaiL,
+      _id: req.session.userId,
+      isAuthenticated: true,
+    };
+
+    return res.status(200).json({
+      message: "User session active",
+      isSessionActive: true,
+      userObj: userObj,
+    });
   } catch (error) {
     console.error("Failed to call /user/login");
     console.log("ERROR:>>", error);
