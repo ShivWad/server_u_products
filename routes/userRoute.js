@@ -118,7 +118,7 @@ route.post("/login", async (req, res) => {
         } else {
           req.session.authenticated = true;
           req.session.name = data[0].name;
-          req.session.emaiL = email;
+          req.session.email = email;
           req.session.userId = data[0].id;
           return res.status(200).json({
             status: "SUCCESS",
@@ -152,7 +152,7 @@ route.get("/checkauth", sessionChecker, (req, res) => {
   try {
     let userObj = {
       name: req.session.name,
-      emaiL: req.session.emaiL,
+      email: req.session.email,
       _id: req.session.userId,
       isAuthenticated: true,
     };
