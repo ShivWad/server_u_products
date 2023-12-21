@@ -2,6 +2,7 @@ const { Router } = require("express");
 const User = require("../db/models/User");
 const { cryptPassword, comparePassword, sessionChecker } = require("../utils");
 const MongoStore = require("connect-mongo");
+const Product = require("../db/models/Products");
 const route = Router();
 /**
  * Create new user
@@ -256,6 +257,20 @@ route.delete("/id/:id", sessionChecker, async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
     console.error(`Failed to call /delete/user/:${id}`);
+  }
+});
+
+route.get("/id/:userId/products", async (req, res) => {
+  let { userId } = req.params;
+  console.log(userId);
+  try {
+    console.log(`Calling /get/product/${userId}/products`);
+    let products = await Product.find({ ownerId: userId });
+
+    return res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message, dbCode: error?.code });
+    console.error(`Failed to call /get/product/${userId}/products`);
   }
 });
 
