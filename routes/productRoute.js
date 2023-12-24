@@ -11,7 +11,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 /**
  * Create product
  */
-route.post("/create", sessionChecker, async (req, res) => {
+route.post("/create", [sessionChecker, upload.any()], async (req, res) => {
   let {
     name,
     ownerId,
@@ -23,7 +23,7 @@ route.post("/create", sessionChecker, async (req, res) => {
     subCategory,
     ownerName,
   } = req.body;
-
+  let uploadedImages = req.files;
   try {
     let productObj = {
       name: name,
@@ -37,8 +37,14 @@ route.post("/create", sessionChecker, async (req, res) => {
     };
 
     if (subCategory) productObj["subCategory"] = subCategory; //by default, category is others
-    if (images) productObj["images"] = images; //by default, category is others
-
+    let imagesStringArray = [];
+    if (uploadedImages.length > 0) {
+      for (let i = 0; i < uploadedImages.length; i++) {
+        let downloadUrl = await uploadFileToFireStore(uploadedImages[i]);
+        if (downloadUrl) imagesStringArray.push(downloadUrl);
+      }
+    }
+    productObj["images"] = imagesStringArray;
     const product = await Product.create(productObj);
 
     console.log("Created product: ", product._id);
@@ -240,7 +246,5 @@ route.get("/filter", async (req, res) => {
     console.error(`Failed to call /filter`);
   }
 });
-
-
 
 module.exports = route;
