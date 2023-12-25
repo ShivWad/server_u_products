@@ -8,7 +8,6 @@ const dotenv = require("dotenv");
 const { CATEGORIES_JSON, GetCityState } = require("./utils");
 const app = express();
 const port = 4000;
-
 dotenv.config();
 
 //connect db
@@ -19,8 +18,8 @@ app.use(
     origin: "*",
   })
 );
-
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 //middleware to just log incoming requests
 app.use((req, res, next) => {
   console.log(`Calling ${req.url}`);

@@ -12,12 +12,13 @@ const upload = multer({ storage: multer.memoryStorage() });
  * Create product
  */
 route.post("/create", [sessionChecker, upload.any()], async (req, res) => {
+  console.log(req.body);
+
   let {
     name,
     ownerId,
     category,
     city,
-    images,
     price,
     description,
     subCategory,
