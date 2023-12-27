@@ -248,4 +248,34 @@ route.get("/filter", async (req, res) => {
   }
 });
 
+/**
+ * Mark as sold
+ */
+route.put("/mark", sessionChecker, async (req, res) => {
+  console.log(req.body);
+
+  let { product_Id, ownerId } = req.body;
+  try {
+    let product = await Product.findById(product_Id);
+
+    if (!product)
+      return res
+        .status(404)
+        .json({ message: `product not found using Id : ${product_Id}}` });
+
+    if (ownerId != product.ownerId)
+      return res.status(400).json({ message: `Owner doesn't match` });
+
+    await product.updateOne({ isAvailable: false });
+    let updatedProduct = await Product.findById(product_Id);
+    return res
+      .status(200)
+      .json({ message: "Product marked as sold", res: updatedProduct });
+  } catch (error) {
+    console.error("Failed to call /product/mark");
+    console.log("ERROR:>>", error);
+    res.status(500).json({ message: error.message, dbCode: error?.code });
+  }
+});
+
 module.exports = route;

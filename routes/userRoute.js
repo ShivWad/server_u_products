@@ -135,7 +135,11 @@ route.post("/login", async (req, res) => {
       .catch((error) => {
         console.error("Failed to call /user/login");
         console.log("ERROR:>>", error);
-        res.status(500).json({ error: error.message, dbCode: error?.code });
+        res.status(500).json({
+          status: "FAILED",
+          message: error.message,
+          dbCode: error?.code,
+        });
       });
   } catch (error) {
     console.error("Failed to call /user/login");
