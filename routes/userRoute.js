@@ -153,6 +153,9 @@ route.post("/login", async (req, res) => {
   }
 });
 
+/**
+ * Checking auth session.
+ */
 route.get("/checkauth", sessionChecker, (req, res) => {
   try {
     let userObj = {
@@ -175,7 +178,7 @@ route.get("/checkauth", sessionChecker, (req, res) => {
 });
 
 /**
- * destroy session
+ * destroy session - logsout
  */
 route.get("/logout", sessionChecker, async (req, res) => {
   try {
@@ -263,7 +266,9 @@ route.delete("/id/:id", sessionChecker, async (req, res) => {
     console.error(`Failed to call /delete/user/:${id}`);
   }
 });
-
+/**
+ * Get user's products
+ */
 route.get("/id/:userId/products", async (req, res) => {
   let { userId } = req.params;
   console.log(userId);
